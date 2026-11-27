@@ -1,0 +1,19 @@
+name: Test
+on: [pull_request, workflow_dispatch]
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, ubuntu-24.04-arm, windows-latest, macos-latest]
+      fail-fast: false
+    runs-on: ${{matrix.os}}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: marler8997/setup-anyzig@master
+      - shell: bash
+        run: |
+          for target in x86_64-linux x86-linux aarch64-linux arm-linux riscv64-linux powerpc64le-linux loongarch64-linux s390x-linux; do
+            zig build test-build -Dtarget=$target --summary all
+          done
+      - if: runner.os == 'Linux'
+        run: zig build test --summary all
