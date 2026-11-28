@@ -1,0 +1,15 @@
+.{
+    .name = .linux,
+    .fingerprint = 0x9211474f19805d4b,
+    .version = "0.0.0",
+    .minimum_zig_version = "0.17.0",
+    .zig_version = "0.17.1",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "test",
+        "README.md",
+        "LICENSE",
+    },
+}
